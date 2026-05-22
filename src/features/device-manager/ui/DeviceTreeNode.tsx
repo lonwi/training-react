@@ -1,22 +1,25 @@
+import { memo } from 'react';
 import type { DeviceNode } from '..';
 
 interface DeviceTreeNodeProps {
-  id: number;
-  name: string;
-  children: DeviceNode[];
+  node: DeviceNode;
 }
 
-export const DeviceTreeNode = ({ id, name, children }: DeviceTreeNodeProps) => {
+export const DeviceTreeNode = memo(({ node }: DeviceTreeNodeProps) => {
+  const { id, name, children } = node;
   return (
-    <li key={id}>
+    <li>
       {name}
       {children.length > 0 ? (
         <ul>
           {children.map((child) => (
-            <DeviceTreeNode {...child} />
+            <DeviceTreeNode key={child.id} node={child} />
           ))}
         </ul>
       ) : null}
     </li>
   );
-};
+});
+
+// Dobra praktyka przy React.memo, ułatwia debugowanie w React DevTools
+DeviceTreeNode.displayName = 'DeviceTreeNode';

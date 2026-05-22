@@ -18,6 +18,7 @@ export const DeviceTree = () => {
   const handleAddNewDevice = () => {
     // 1. Najpierw modyfikujemy obecne drzewo (dodajemy element do tablicy)
     deviceTree.add(7, 3, 'Nowy Dysk');
+    deviceTree.add(7, 20, 'Nowy Dysk');
 
     // 2. Tworzymy kopię całego drzewa o NOWYM adresie w pamięci
     const newTreeStructure = deviceTree.clone();
@@ -30,7 +31,7 @@ export const DeviceTree = () => {
     <>
       <ul>
         {deviceTree.children.map((child) => (
-          <DeviceTreeNode {...child} />
+          <DeviceTreeNode key={child.id} node={child} />
         ))}
       </ul>
       <button onClick={handleAddNewDevice}>Add</button>
