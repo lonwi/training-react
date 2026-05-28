@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { App } from './app/App';
+import { RouterProvider } from 'react-router';
+import { router } from './app/router';
 
 // Funkcja asynchroniczna, która dynamicznie importuje MSW
 async function enableMocking() {
@@ -21,10 +22,10 @@ async function enableMocking() {
 }
 
 // Najpierw czekamy na uruchomienie MSW, a DOPIERO POTEM renderujemy aplikację
-enableMocking().then(() => {
+void enableMocking().then(() => {
   createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-      <App />
+      <RouterProvider router={router} />
     </React.StrictMode>,
   );
 });
